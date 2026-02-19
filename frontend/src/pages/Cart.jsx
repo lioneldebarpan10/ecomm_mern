@@ -3,12 +3,13 @@ import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title';
 import { assets } from '../assets/assets';
 import CartTotal from '../components/CartTotal';
+import { Link } from 'react-router-dom';
 
 
 const Cart = () => {
 
-  const { currency, products, cartItems , updateQuantity ,navigate } = useContext(ShopContext);
-  const [cartData, setCartData ] = useState([]);
+  const { currency, products, cartItems, updateQuantity, navigate } = useContext(ShopContext);
+  const [cartData, setCartData] = useState([]);
 
   useEffect(() => {
     const tempData = [];
@@ -27,9 +28,9 @@ const Cart = () => {
     }
     //console.log(tempData) -> check log for cart entries
     setCartData(tempData);
-  }, [cartItems , products])
+  }, [cartItems, products])
 
-  return (
+  return cartData.length > 0 ? (
     <div className='border-t pt-14'>
 
       {/**Title Cart */}
@@ -42,7 +43,7 @@ const Cart = () => {
         {
           cartData.map((item, index) => {
             const productData = products.find((product) => product._id === item._id);
-            if(!productData) return null;
+            if (!productData) return null;
 
 
             return (
@@ -59,8 +60,8 @@ const Cart = () => {
                   </div>
                 </div>
 
-                <input type="number" min={1} defaultValue={item.quantity}  className='border max-w-10 sm:max-w-20 sm:px-2 py-1' onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id , item.size , Number(e.target.value))}/>
-                <img src= {assets.bin_icon} alt="delete-icon" className='cursor-pointer w-4 mr-4 sm:w-5' onClick={() => updateQuantity(item._id , item.size , 0)}/>
+                <input type="number" min={1} defaultValue={item.quantity} className='border max-w-10 sm:max-w-20 sm:px-2 py-1' onChange={(e) => e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))} />
+                <img src={assets.bin_icon} alt="delete-icon" className='cursor-pointer w-4 mr-4 sm:w-5' onClick={() => updateQuantity(item._id, item.size, 0)} />
               </div>
             )
           })
@@ -77,6 +78,17 @@ const Cart = () => {
 
       </div>
 
+    </div>
+  ) : (
+    <div className='flex flex-col items-center justify-center min-h-[50vh] gap-4'>
+      <div className='w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center'>
+        <img src={assets.cart_icon} alt="Empty Cart" className='w-8 h-8 opacity-40' />
+      </div>
+      <h2 className='text-2xl font-medium text-gray-700'>Your cart is empty</h2>
+      <p className='text-gray-500'>Discover our curated collection of premium essentials.</p>
+      <Link to="/collection" className='bg-black text-white px-8 py-3 text-sm uppercase tracking-wide rounded-sm hover:bg-gray-800 transition-colors mt-4'>
+        Browse Collection
+      </Link>
     </div>
   )
 }

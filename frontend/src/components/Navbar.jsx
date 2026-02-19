@@ -7,7 +7,7 @@ import { ShopContext } from '../context/ShopContext'
 const Navbar = () => {
 
    const [visible, setVisible] = useState(false);
-   const { setShowSearch, getCartCount } = useContext(ShopContext);
+   const { setShowSearch, getCartCount, getWishlistCount, navigate } = useContext(ShopContext);
    return (
       <div className='flex items-center justify-between py-5 font-medium'>
          {/*Left Section Logo  */}
@@ -41,22 +41,29 @@ const Navbar = () => {
 
             {/*Profile Menu design & dropdown */}
             <div className='group relative'>
-               <Link to = '/login' ><img src={assets.profile_icon} alt="profile-icon" className='w-5 cursor-pointer' /></Link>
+               <Link to='/login' ><img src={assets.profile_icon} alt="profile-icon" className='w-5 cursor-pointer' /></Link>
                <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
                   <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-200 text-gray-500 rounded'>
                      <p className='cursor-pointer hover:text-black'>My Profile</p>
-                     <p className='cursor-pointer hover:text-black'>Orders</p>
-                     <p className='cursor-pointer hover:text-black'>Log out</p>
+                     <p className='cursor-pointer hover:text-black' onClick={() => navigate('/orders')}>Orders</p>
+                     <p className='cursor-pointer hover:text-black' onClick={() => navigate('/login')}>Log out</p>
                   </div>
                </div>
             </div>
+
+            {/*Wishlist Icon Design Section */}
+            <Link to='/wishlist' className='relative'>
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 min-w-5">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+               </svg>
+               <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>{getWishlistCount()}</p>
+            </Link>
 
             {/*Cart Icon Design Section */}
             <Link to='/cart' className='relative'>
                <img src={assets.cart_icon} alt="cart-icon" className='w-5 min-w-5' />
                <p className='absolute right-[-5px] bottom-[-5px] w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[8px]'>{getCartCount()}</p>
             </Link>
-
 
             {/**Side bar Menu icon for smaller screens */}
             <img onClick={() => setVisible(true)} src={assets.menu_icon} alt="sidebar-menu" className='w-5 cursor-pointer sm:hidden' />

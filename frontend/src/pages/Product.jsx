@@ -7,10 +7,13 @@ import RelatedProducts from '../components/RelatedProducts';
 const Product = () => {
 
   const { productId } = useParams();
-  const { products, currency , addToCart } = useContext(ShopContext);
+  const { products, currency, addToCart, addToWishlist, wishlistItems } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState('')
   const [size, setSize] = useState('')
+  const [quantity, setQuantity] = useState(1);
+
+  const isInWishlist = wishlistItems[productData._id];
 
   const fetchProductData = async () => {
     products.map((item) => {
@@ -68,15 +71,40 @@ const Product = () => {
             <div className='flex gap-2'>
               {
                 productData.sizes.map((item, index) => (
-                  <button onClick={(() => setSize(item))} key={index} className={`border py-2 px-4 bg-slate-100 cursor-pointer ${item === size ? ' bg-slate-900 border-gray-800 text-white' : ''
+                  <button onClick={(() => setSize(item))} key={index} className={`border py-2 px-4 cursor-pointer ${item === size ? ' bg-black text-white border-black' : 'hover:bg-gray-200'
                     }`} >{item}</button>
                 ))
               }
             </div>
           </div>
 
-          <button className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700 cursor-pointer' onClick={() =>  addToCart(productData._id , size)}>Add to Cart</button>
-          <hr className='mt-8 sm:w-4/5'/>
+          <div className='flex flex-col gap-4 my-8'>
+            <p>Quantity</p>
+            <div className='flex items-center gap-4'>
+              <div className='flex items-center border border-gray-300'>
+                <button onClick={() => setQuantity(prev => (prev > 1 ? prev - 1 : 1))} className='px-4 py-2 hover:bg-gray-100 cursor-pointer'>-</button>
+                <p className='px-4 py-2 border-l border-r border-gray-300'>{quantity}</p>
+                <button onClick={() => setQuantity(prev => prev + 1)} className='px-4 py-2 hover:bg-gray-100 cursor-pointer'>+</button>
+              </div>
+            </div>
+          </div>
+
+          <div className='flex gap-4 items-center'>
+            <button className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700 cursor-pointer w-full sm:w-auto uppercase tracking-wide' onClick={() => addToCart(productData._id, size, quantity)}>Add to Cart</button>
+
+            <button onClick={() => addToWishlist(productData._id)} className='border border-gray-300 p-3 rounded hover:bg-gray-50 cursor-pointer'>
+              {isInWishlist ? (
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6 text-red-500">
+                  <path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+              )}
+            </button>
+          </div>
+          <hr className='mt-8 sm:w-4/5' />
 
           <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
             <p>100% Original Product</p>
@@ -99,7 +127,7 @@ const Product = () => {
       </div>
 
       {/**Related Products */}
-      <RelatedProducts category={productData.category} subCategory={productData.subCategory}/>
+      <RelatedProducts category={productData.category} subCategory={productData.subCategory} />
 
     </div>
   ) : <div className='opacity-0'></div>
