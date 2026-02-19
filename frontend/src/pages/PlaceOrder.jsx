@@ -67,7 +67,8 @@ const PlaceOrder = () => {
           </div>
 
           <div className='w-full text-end mt-8'>
-            <button className='bg-black text-white px-16 py-3 text-sm cursor-pointer' onChange={navigate('/orders')}>Place Order</button>
+            <button className='bg-black text-white px-16 py-3 text-sm cursor-pointer' onClick={() => navigate('/orders')}
+            >Place Order</button>
           </div>
         </div>
       </div>

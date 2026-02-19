@@ -27,7 +27,7 @@ const Cart = () => {
     }
     //console.log(tempData) -> check log for cart entries
     setCartData(tempData);
-  }, [cartItems])
+  }, [cartItems , products])
 
   return (
     <div className='border-t pt-14'>
@@ -42,6 +42,7 @@ const Cart = () => {
         {
           cartData.map((item, index) => {
             const productData = products.find((product) => product._id === item._id);
+            if(!productData) return null;
 
 
             return (
