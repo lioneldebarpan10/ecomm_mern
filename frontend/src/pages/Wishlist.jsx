@@ -38,7 +38,7 @@ const Wishlist = () => {
                 {
                     wishlistData.map((item, index) => (
                         <div key={index} className="relative group">
-                            <ProductItem id={item._id} image={item.image} name={item.name} price={item.price} />
+                            <ProductItem id={item._id} image={item.image} name={item.name} price={item.price} discount={item.discount} bestseller={item.bestseller} />
                             <div className='p-2'>
                                 <button
                                     onClick={(e) => {

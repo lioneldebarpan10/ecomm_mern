@@ -1,5 +1,6 @@
 import React from 'react'
 import { assets } from '../assets/assets'
+import { Link } from 'react-router-dom';
 
 const Hero = () => {
    return (
@@ -12,9 +13,16 @@ const Hero = () => {
                   <p className='font-medium text-sm md:text-base uppercase tracking-widest'>Our Bestsellers</p>
                </div>
                <h1 className='text-4xl sm:py-3 lg:text-6xl leading-tight prata-regular mb-4'>Latest Arrivals</h1>
-               <div className='flex items-center gap-2 justify-center sm:justify-start hover:text-gray-600 transition-colors cursor-pointer'>
-                  <p className='font-semibold text-sm md:text-base uppercase tracking-wide'>Shop Now</p>
-                  <p className='w-8 md:w-11 h-[1px] bg-[#414141]'></p>
+               <div className='flex items-center gap-2 mt-5'>
+                  <Link to='/collection' className='bg-[#333] text-white px-8 py-3 text-xs sm:text-sm uppercase font-medium hover:bg-black transition-all flex items-center gap-2'>
+                     Explore Collection
+                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" />
+                     </svg>
+                  </Link>
+                  <Link to='/collection' className='bg-white text-[#333] px-8 py-3 text-xs sm:text-sm uppercase font-medium border border-[#333] hover:bg-gray-50 transition-all'>
+                     View Categories
+                  </Link>
                </div>
             </div>
 

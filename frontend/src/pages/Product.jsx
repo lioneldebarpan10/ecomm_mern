@@ -54,6 +54,18 @@ const Product = () => {
         {/**Product info section */}
         <div className='flex-1'>
           <h1 className='font-medium text-2xl mt-2'>{productData.name}</h1>
+          <div className='flex items-center gap-2 mt-2 flex-wrap'>
+            {productData.bestseller && (
+              <span className='bg-black text-white text-[10px] uppercase font-bold px-2 py-1 rounded-sm shadow-sm leading-none'>
+                Best Seller
+              </span>
+            )}
+            {productData.discount && (
+              <span className='bg-[#FF414D] text-white text-[10px] uppercase font-bold px-2 py-1 rounded-sm shadow-sm leading-none'>
+                -{productData.discount}% Off
+              </span>
+            )}
+          </div>
           <div className='flex items-center gap-1 mt-2'>
             <img src={assets.star_icon} alt="star-icon" className="w-3 5" />
             <img src={assets.star_icon} alt="star-icon" className="w-3 5" />
@@ -61,7 +73,6 @@ const Product = () => {
             <img src={assets.star_icon} alt="star-icon" className="w-3 5" />
             <img src={assets.star_dull_icon} alt="star-icon" className="w-3 5" />
             <p className='pl-2'>(122)</p>
-
           </div>
           <p className='mt-5 text-3xl font-medium'>{currency}{productData.price}</p>
           <p className='mt-5 text-gray-500 md:w-4/5'>{productData.description}</p>
