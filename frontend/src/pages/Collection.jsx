@@ -66,6 +66,9 @@ const Collection = () => {
       case 'high-low':
         setFilterProducts(fpCopy.sort((a, b) => (b.price - a.price)));
         break;
+      case 'best-seller':
+        setFilterProducts(fpCopy.sort((a, b) => (b.bestseller === a.bestseller ? 0 : b.bestseller ? 1 : -1)));
+        break;
 
       default:
         applyFilter();
@@ -85,7 +88,7 @@ const Collection = () => {
     <div className='flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t'>
 
       {/**Filter Section */}
-      <div className='min-w-60'>
+      <div className='min-w-60 sm:sticky sm:top-4 self-start'>
         <p onClick={() => setShowFilter(!showFilter)} className='my-2 gap-2  text-xl  flex items-center cursor-pointer'>Filters
           <img src={assets.dropdown_icon} alt="dropdown-icon" className={`h-3 sm:hidden ${showFilter ? 'rotate-90' : ''}`} />
         </p>
@@ -136,8 +139,9 @@ const Collection = () => {
           {/**Product Sort */}
           <select className='border-2 border-gray-300 text-sm px-2' onChange={(e) => setSortType(e.target.value)}>
             <option value="Relevent">Sort by: Relevent</option>
-            <option value="low-high">Sort by:Low to High</option>
+            <option value="low-high">Sort by: Low to High</option>
             <option value="high-low">Sort by: High to Low</option>
+            <option value="best-seller">Sort by: Best Seller</option>
           </select>
         </div>
 
