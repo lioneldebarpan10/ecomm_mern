@@ -1,8 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { assets } from '../assets/assets'
 import { Link } from 'react-router-dom';
 
+const heroImages = [
+   assets.hero_img,
+   assets.hero_img2,
+   assets.hero_img3,
+   assets.hero_img4,
+];
+
 const Hero = () => {
+
+   const [currentIndex, setCurrentIndex] = useState(0);
+
+   useEffect(() => {
+      const interval = setInterval(() => {
+         setCurrentIndex(prev => (prev + 1) % heroImages.length);
+      }, 3000);
+      return () => clearInterval(interval);
+   }, []);
+
    return (
       <div className='flex flex-col sm:flex-row border border-gray-400 mt-5'>
          {/**Hero Left */}
@@ -24,11 +41,38 @@ const Hero = () => {
                      View Categories
                   </Link>
                </div>
-            </div>
 
+               {/* Dot indicators */}
+               <div className='flex items-center gap-2 mt-6 justify-center sm:justify-start'>
+                  {heroImages.map((_, i) => (
+                     <button
+                        key={i}
+                        onClick={() => setCurrentIndex(i)}
+                        className={`rounded-full transition-all duration-300 cursor-pointer ${i === currentIndex
+                           ? 'bg-[#414141] w-4 h-2'
+                           : 'bg-gray-300 w-2 h-2'
+                           }`}
+                     />
+                  ))}
+               </div>
+            </div>
          </div>
-         {/*Hero right */}
-         <img src={assets.hero_img} alt="hero-image" className='w-full sm:w-1/2 object-cover' />
+
+         {/**Hero Right - Crossfade Slideshow */}
+         <div className='w-full sm:w-1/2 relative overflow-hidden max-h-[450px] sm:max-h-[525px]'>
+            {/* Invisible placeholder keeps the natural image height */}
+            <img src={heroImages[0]} alt="" className='w-full invisible max-h-[450px] sm:max-h-[525px] object-cover' aria-hidden="true" />
+            {/* Crossfading images stacked on top */}
+            {heroImages.map((src, i) => (
+               <img
+                  key={i}
+                  src={src}
+                  alt={`hero-slide-${i + 1}`}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${i === currentIndex ? 'opacity-100 z-10' : 'opacity-0 z-0'
+                     }`}
+               />
+            ))}
+         </div>
 
       </div>
    )

@@ -22,8 +22,8 @@ const ProductItem = ({ id, image, name, price, discount, bestseller }) => {
 
    return (
       <Link to={`/product/${id}`} className='text-gray-700 cursor-pointer relative group'>
-         <div className='overflow-hidden relative'>
-            <img src={image[0]} alt="" className='hover:scale-110 transition ease-in-out' />
+         <div className='overflow-hidden relative aspect-[4/5]'>
+            <img src={image[0]} alt="" className='w-full h-full object-cover hover:scale-110 transition ease-in-out' />
             {/* Badges */}
             <div className='absolute top-2 left-2'>
                {bestseller && (
