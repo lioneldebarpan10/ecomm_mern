@@ -70,7 +70,7 @@ const Navbar = () => {
          </div>
 
          {/*Sidebar Menu for Smaller screens */}
-         <div className={`absolute top-0 right-0 bottom-0 overflow-hidden bg-white transition-all  ${visible ? 'w-full' : 'w-0'}`}>
+         <div className={`fixed top-0 right-0 h-screen overflow-hidden bg-white transition-all z-50 ${visible ? 'w-full' : 'w-0'}`}>
             <div className='flex flex-col text-gray-600'>
                <div className="flex items-center p-3 gap-4 cursor-pointer" onClick={() => setVisible(false)}>
                   <img src={assets.dropdown_icon} alt="sidebar-dropdown" className='h-4 rotate-180' />
