@@ -68,9 +68,18 @@ import p_img20_1 from './p_img20_1.webp'
 import p_img20_2 from './p_img20_2.webp'
 import p_img20_3 from './p_img20_3.webp'
 
-import p_img21 from './p_img21.png'
-import p_img22 from './p_img22.png'
+import p_img21_1 from './p_img21_1.webp'
+import p_img21_2 from './p_img21_2.webp'
+import p_img21_3 from './p_img21_3.webp'
+import p_img21_4 from './p_img21_4.webp'
+
+import p_img22_1 from './p_img22_1.webp'
+import p_img22_2 from './p_img22_2.webp'
+import p_img22_3 from './p_img22_3.webp'
+import p_img22_4 from './p_img22_4.webp'
+
 import p_img23 from './p_img23.png'
+
 import p_img24 from './p_img24.png'
 import p_img25 from './p_img25.png'
 import p_img26 from './p_img26.png'
@@ -438,19 +447,20 @@ export const products = [
         name: "Women Zip-Front Relaxed Fit Jacket",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 170,
-        image: [p_img21],
+        image: [p_img21_1, p_img21_2, p_img21_3, p_img21_4],
         category: "Women",
         subCategory: "Winterwear",
         sizes: ["S", "M", "L", "XL"],
         date: 1716634345448,
-        bestseller: false
+        bestseller: true,
+        discount: 18
     },
     {
         _id: "aaaav",
         name: "Women Palazzo Pants with Waist Belt",
         description: "A lightweight, usually knitted, pullover shirt, close-fitting and with a round neckline and short sleeves, worn as an undershirt or outer garment.",
         price: 200,
-        image: [p_img22],
+        image: [p_img22_1, p_img22_2, p_img22_3, p_img22_4],
         category: "Women",
         subCategory: "Bottomwear",
         sizes: ["S", "M", "L", "XL"],
