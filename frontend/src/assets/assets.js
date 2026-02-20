@@ -147,7 +147,7 @@ import p_img62_2 from './p_img62_2.webp'
 import p_img62_3 from './p_img62_3.webp'
 import p_img62_4 from './p_img62_4.webp'
 
-import logo from './logo.png'
+import logo from './wearova_logo.png'
 import hero_img from './hero_img.jpg'
 import hero_img2 from './hero_img2.jpg'
 import hero_img3 from './hero_img3.jpg'
