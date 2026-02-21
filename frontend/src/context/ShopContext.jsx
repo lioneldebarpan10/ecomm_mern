@@ -99,7 +99,7 @@ const ShopContextProvider = (props) => {
             if (cartItems[items][item] > 0) {
                const itemInfo = structuredClone(products.find(product => product._id === items));
                if (itemInfo) {
-                  itemInfo.size = item;
+                  itemInfo.sizes = item;
                   itemInfo.quantity = cartItems[items][item];
                   itemInfo.date = new Date().toDateString(); // Add current date
                   itemInfo.status = 'Order Placed';
